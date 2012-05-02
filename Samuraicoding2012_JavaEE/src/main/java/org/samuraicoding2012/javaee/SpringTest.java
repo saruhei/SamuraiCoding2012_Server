@@ -1,5 +1,6 @@
 package org.samuraicoding2012.javaee;
 
+import org.samuraicoding2012.javaee.utility.HttpRequestSender;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
