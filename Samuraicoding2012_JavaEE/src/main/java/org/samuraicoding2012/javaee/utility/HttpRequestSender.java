@@ -51,14 +51,25 @@ public class HttpRequestSender
 		URL url = new URL(strUrl);
 		HttpURLConnection urlconn = (HttpURLConnection) url.openConnection();
 		urlconn.setRequestMethod("GET");
+<<<<<<< HEAD
 		urlconn.connect();//接続，同時にリクエスト？？
 		BufferedReader reader = new BufferedReader(new InputStreamReader(
 				urlconn.getInputStream()));
 		while ((isLine = reader.readLine()) != null)//レスポンス受信
+=======
+		urlconn.connect();
+		BufferedReader reader = new BufferedReader(new InputStreamReader(
+				urlconn.getInputStream()));
+		while ((isLine = reader.readLine()) != null)
+>>>>>>> 10be14a225c8e48fde83ad5165a35899dbcfa979
 		{
 			json.append(isLine);
 		}
 		reader.close();
+<<<<<<< HEAD
+=======
+		
+>>>>>>> 10be14a225c8e48fde83ad5165a35899dbcfa979
 		int responseCode = urlconn.getResponseCode();
 		return responseCode + ":" + json.toString();
 	}
@@ -68,8 +79,12 @@ public class HttpRequestSender
 	{
 		StringBuffer json = new StringBuffer();
 		String isLine;
+<<<<<<< HEAD
 		//Map<String,String>m=new HashMap<String, String>();
 		String paramStr = hash2String2(params);
+=======
+		String paramStr = hash2String(params);
+>>>>>>> 10be14a225c8e48fde83ad5165a35899dbcfa979
 		Debugger.print("POST: " + strUrl);
 		Debugger.print("POST PARAMS: " + paramStr);
 		URL url = new URL(strUrl);
@@ -79,12 +94,20 @@ public class HttpRequestSender
 		urlconn.connect();
 		OutputStreamWriter osw = new OutputStreamWriter(
 				urlconn.getOutputStream());
+<<<<<<< HEAD
 		osw.write(paramStr);//パラメータを文字列化したやつをpost?リクエスト送信。
+=======
+		osw.write(paramStr);
+>>>>>>> 10be14a225c8e48fde83ad5165a35899dbcfa979
 		osw.flush();
 		osw.close();
 		BufferedReader reader = new BufferedReader(new InputStreamReader(
 				urlconn.getInputStream()));
+<<<<<<< HEAD
 		while ((isLine = reader.readLine()) != null)//レスポンス受信
+=======
+		while ((isLine = reader.readLine()) != null)
+>>>>>>> 10be14a225c8e48fde83ad5165a35899dbcfa979
 		{
 			json.append(isLine);
 		}
@@ -94,6 +117,7 @@ public class HttpRequestSender
 		return responseCode + ":" + json.toString();
 	}
 	
+<<<<<<< HEAD
 	private String hash2String(Map<String,String> params){
 		StringBuilder ret = new StringBuilder();
 		Set<Entry<String,String>> set = params.entrySet();
@@ -112,12 +136,24 @@ public class HttpRequestSender
 			String key = (String)entry.getKey();
 			String value = (String)entry.getValue();
 			ret.append(key+"="+value+",");
+=======
+	private  <K extends Object, V extends Object>  String hash2String(Map<K,V> params){
+		StringBuilder ret = new StringBuilder();
+		Set<Entry<K,V>> set = params.entrySet();
+		for(Entry<K,V> entry : set){
+			String key = entry.getKey().toString();
+			String value = entry.getValue().toString();
+			ret.append(key+"="+value+"&");
+>>>>>>> 10be14a225c8e48fde83ad5165a35899dbcfa979
 		}
 		ret.deleteCharAt(ret.length()-1);
 		return ret.toString();
 	}
 	
+<<<<<<< HEAD
 	//シングルトン
+=======
+>>>>>>> 10be14a225c8e48fde83ad5165a35899dbcfa979
 	public static synchronized HttpRequestSender getInstance()
 	{
 		if (self == null)
