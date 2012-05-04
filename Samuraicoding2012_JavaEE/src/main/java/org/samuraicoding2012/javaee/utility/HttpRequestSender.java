@@ -59,6 +59,7 @@ public class HttpRequestSender
 			json.append(isLine);
 		}
 		reader.close();
+		
 		int responseCode = urlconn.getResponseCode();
 		return responseCode + ":" + json.toString();
 	}
@@ -93,13 +94,13 @@ public class HttpRequestSender
 		return responseCode + ":" + json.toString();
 	}
 	
-	private String hash2String(Map<String,String> params){
+	private  <K extends Object, V extends Object>  String hash2String(Map<K,V> params){
 		StringBuilder ret = new StringBuilder();
-		Set<Entry<String,String>> set = params.entrySet();
-		for(Entry<String,String> entry : set){
-			String key = entry.getKey();
-			String value = entry.getValue();
-			ret.append(key+"="+value+",");
+		Set<Entry<K,V>> set = params.entrySet();
+		for(Entry<K,V> entry : set){
+			String key = entry.getKey().toString();
+			String value = entry.getValue().toString();
+			ret.append(key+"="+value+"&");
 		}
 		ret.deleteCharAt(ret.length()-1);
 		return ret.toString();
