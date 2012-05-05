@@ -6,5 +6,8 @@
 	<classpathentry kind="src" path="src/test/resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.maven.ide.eclipse.MAVEN2_CLASSPATH_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/T.N/My Documents/My Folder/tool/eclipse/eclipse-jee-indigo-SR2-win32/eclipse/plugins/org.springframework.beans_3.0.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/T.N/My Documents/My Folder/tool/eclipse/eclipse-jee-indigo-SR2-win32/eclipse/plugins/org.springframework.core_3.0.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/T.N/My Documents/My Folder/tool/eclipse/eclipse-jee-indigo-SR2-win32/eclipse/plugins/org.apache.commons.logging_1.1.1.v201005080502.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
