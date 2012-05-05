@@ -1,11 +1,9 @@
 package org.samuraicoding2012.javaee;
 
-<<<<<<< HEAD
+
 import java.util.HashMap;
 import java.util.Map;
 
-=======
->>>>>>> 10be14a225c8e48fde83ad5165a35899dbcfa979
 import org.samuraicoding2012.javaee.utility.HttpRequestSender;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.FileSystemResource;
