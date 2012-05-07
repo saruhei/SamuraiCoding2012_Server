@@ -5,5 +5,8 @@ bin/*
 *.war
 *.ear
 
+# Farget Files
+Samuraicoding2012_JavaEE/target
+
 .DS_Store
 *.swp
