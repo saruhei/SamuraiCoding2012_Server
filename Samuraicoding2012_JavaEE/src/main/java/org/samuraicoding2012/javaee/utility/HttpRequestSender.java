@@ -19,8 +19,8 @@ public class HttpRequestSender
 		GET, POST
 	}
 
-	public <K extends Object, V extends Object> String request(String strUrl, METHOD method,
-			HashMap<K, V> params) throws Exception
+	public <K extends Object, V extends Object> Response request(String strUrl, METHOD method,
+			HashMap<K, V> params)
 	{
 		switch (method)
 		{
@@ -29,17 +29,18 @@ public class HttpRequestSender
 			case POST:
 				return postRequest(strUrl, params);
 			default:
-				return "";
+				return null;
 		}
 	}
 
-	private <K extends Object, V extends Object> String getRequest(
-			String strUrl, Map<K, V> params) throws Exception
+	private <K extends Object, V extends Object> Response getRequest(
+			String strUrl, Map<K, V> params)
 	{
 		StringBuffer json = new StringBuffer();
 		String isLine;
 		Set<Entry<K, V>> entries = params.entrySet();
 		strUrl += "?";
+		Response res = new Response();
 		for (Entry<K, V> entry : entries)
 		{
 			K key = entry.getKey();
@@ -48,49 +49,63 @@ public class HttpRequestSender
 		}
 		strUrl = strUrl.substring(0, strUrl.length() - 1);
 		Debugger.print("GET: " + strUrl);
-		URL url = new URL(strUrl);
-		HttpURLConnection urlconn = (HttpURLConnection) url.openConnection();
-		urlconn.setRequestMethod("GET");
-		urlconn.connect();
-		BufferedReader reader = new BufferedReader(new InputStreamReader(
+		try{
+			URL url = new URL(strUrl);
+			HttpURLConnection urlconn = (HttpURLConnection) url.openConnection();
+			urlconn.setRequestMethod("GET");
+			urlconn.connect();
+			BufferedReader reader = new BufferedReader(new InputStreamReader(
 				urlconn.getInputStream()));
-		while ((isLine = reader.readLine()) != null)
-		{
-			json.append(isLine);
+			while ((isLine = reader.readLine()) != null)
+			{
+				json.append(isLine);
+			}
+			reader.close();
+			int responseCode = urlconn.getResponseCode();
+			res.setResponseCode(responseCode);
+			res.setData(json.toString());
+		}catch(Exception e){
+			res.setException(e);
+			res.setException(true);
 		}
-		reader.close();
-		int responseCode = urlconn.getResponseCode();
-		return responseCode + ":" + json.toString();
+		return res;
 	}
 
-	private <K extends Object, V extends Object> String postRequest(
-			String strUrl, Map<K, V> params) throws Exception
+	private <K extends Object, V extends Object> Response postRequest(
+			String strUrl, Map<K, V> params)
 	{
 		StringBuffer json = new StringBuffer();
 		String isLine;
 		String paramStr = hash2String(params);
+		Response res = new Response();
 		Debugger.print("POST: " + strUrl);
 		Debugger.print("POST PARAMS: " + paramStr);
-		URL url = new URL(strUrl);
-		HttpURLConnection urlconn = (HttpURLConnection) url.openConnection();
-		urlconn.setRequestMethod("POST");
-		urlconn.setDoOutput(true);
-		urlconn.connect();
-		OutputStreamWriter osw = new OutputStreamWriter(
-				urlconn.getOutputStream());
-		osw.write(paramStr);
-		osw.flush();
-		osw.close();
-		BufferedReader reader = new BufferedReader(new InputStreamReader(
-				urlconn.getInputStream()));
-		while ((isLine = reader.readLine()) != null)
-		{
-			json.append(isLine);
+		try{
+			URL url = new URL(strUrl);
+			HttpURLConnection urlconn = (HttpURLConnection) url.openConnection();
+			urlconn.setRequestMethod("POST");
+			urlconn.setDoOutput(true);
+			urlconn.connect();
+			OutputStreamWriter osw = new OutputStreamWriter(
+					urlconn.getOutputStream());
+			osw.write(paramStr);
+			osw.flush();
+			osw.close();
+			BufferedReader reader = new BufferedReader(new InputStreamReader(
+					urlconn.getInputStream()));
+			while ((isLine = reader.readLine()) != null)
+			{
+				json.append(isLine);
+			}
+			reader.close();
+			int responseCode = urlconn.getResponseCode();
+			res.setResponseCode(responseCode);
+			res.setData(json.toString());
+		}catch(Exception e){
+			res.setException(e);
+			res.setException(true);
 		}
-		reader.close();
-		int responseCode = urlconn.getResponseCode();
-
-		return responseCode + ":" + json.toString();
+		return res;
 	}
 	
 	private  <K extends Object, V extends Object>  String hash2String(Map<K,V> params){

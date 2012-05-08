@@ -6,6 +6,9 @@ public class Response
 	int responseCode;
 	Exception exception;
 	boolean isException;
+	public Response(){
+		this.isException = false;
+	}
 	public String getData()
 	{
 		return data;
