@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.samuraicoding2012.javaee.utility.HttpRequestSender;
+import org.samuraicoding2012.javaee.utility.Response;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
@@ -18,7 +19,7 @@ public class SpringTest
 		HashMap<String, String> m=new HashMap<String, String>();
 		m.put("key","value");
 		String urlStr="http://localhost:8080/stub-servlet/GameEngineStub";
-		String str=sender.request(urlStr, HttpRequestSender.METHOD.POST, m);
+		Response str=sender.request(urlStr, HttpRequestSender.METHOD.POST, m);
 		Thread.sleep(1000);
 		System.out.println("-----");
 		System.out.println(str);
