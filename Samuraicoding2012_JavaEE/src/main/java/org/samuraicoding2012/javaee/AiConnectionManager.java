@@ -1,8 +1,6 @@
 package org.samuraicoding2012.javaee;
 
-import java.util.HashMap;
-
-import javax.security.auth.login.ConfigurationSpi;
+import java.util.Map;
 
 import org.samuraicoding2012.javaee.utility.HttpRequestSender;
 import org.samuraicoding2012.javaee.utility.Response;
@@ -25,7 +23,7 @@ public class AiConnectionManager {
 		return overTimeSum;
 	}
 	
-	public Response request(HashMap<String, String> params){
+	public Response request(Map<String, String> params){
 		HttpRequestSender hs = HttpRequestSender.getInstance();
 		// In addition to game data, sum of the overtime should be sent.
 		params.put("overTimeSum",(overTimeSum+""));

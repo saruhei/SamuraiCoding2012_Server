@@ -5,7 +5,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -20,7 +19,7 @@ public class HttpRequestSender
 	}
 
 	public <K extends Object, V extends Object> Response request(String strUrl, METHOD method,
-			HashMap<K, V> params)
+			Map<K, V> params)
 	{
 		switch (method)
 		{
